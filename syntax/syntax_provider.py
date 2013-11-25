@@ -9,15 +9,15 @@ class SyntaxProvider(object):
 	@staticmethod
 	def factory(providerName="", **kwargs):
 		#Add all providers here
-		from libconfig_provider import LibconfigProvider
 
 		#Default
 		if providerName == "":
-			providerName = LibconfigProvider.__name__ 
+			providerName = "LibconfigProvider"
 
 		#Provider factory		
-		if providerName == LibconfigProvider.__name__:
-			return LibconfigProvider(*kwargs)
+		if providerName == "LibconfigProvider":
+			from libconfig_provider import LibconfigProvider
+			return LibconfigProvider(**kwargs)
 
 		raise Exception("Unsupported RPC provider") 
 

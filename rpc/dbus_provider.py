@@ -6,7 +6,7 @@ class DbusProvider(RpcProvider):
 
 	def __init__(self, **kwargs):
 		print "Initalizing DBUS RPC provider..."
-		self.syntax_provider = SyntaxProvider.factory("LibconfigProvider")
+		self.syntax_provider = SyntaxProvider.factory("LibconfigProvider", appName=self.getAppName(), rpcProvider=self)
 
 	#Provider Interface methods
 	def getAppName(self): 
@@ -17,11 +17,16 @@ class DbusProvider(RpcProvider):
 
 	def getActions(self): 
 		return [] 
+
+	def getConfigurationSchema(self):
+		#TODO RPC-it
+		schema = open("syntax/schema.xsd", 'r').read()
+		return schema
 	
  	def getConfiguration(self, parent, index=0):
 		#FIXME: Call rpc
 		rpc_string = open("rpc/example_complex.cfg", 'r').read()
-		return self.syntax_provider.deserialize("", rpc_string, parent)
+		return self.syntax_provider.deserialize(rpc_string, parent)
 
  	def setConfiguration(self, config, dry_run=False):
 		rpc_string = syntax_provider.serialize(config)

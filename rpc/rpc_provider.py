@@ -10,14 +10,14 @@ class RpcProvider(object):
 	@staticmethod
 	def factory(providerName="", **kwargs):
 		#Add all providers here
-		from dbus_provider import DbusProvider
 
 		#Default
 		if providerName == "":
-			providerName = DbusProvider.__name__ 
+			providerName = "DbusProvider"
 
 		#Provider factory		
-		if providerName == DbusProvider.__name__:
+		if providerName == "DbusProvider":
+			from dbus_provider import DbusProvider
 			return DbusProvider(*kwargs)
 
 		raise Exception("Unsupported RPC provider") 
@@ -33,6 +33,13 @@ class RpcProvider(object):
 
 	def getActions(self): 
 		""" Returns the list of CLIActions """
+		raise Exception("Not implemented")
+
+ 	def getConfigurationSchema(self): 
+		""" 
+		Returns the CLI configuratin hierarchy structure
+		defined by whatever convention (e.g. XSD)
+		"""
 		raise Exception("Not implemented")
 
  	def getConfiguration(self, parent, index=0): 

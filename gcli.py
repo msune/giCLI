@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-from core.root import CLIRoot
+from core.root import Root
+from core.exceptions import Quit
 from rpc.rpc_provider import RpcProvider 
 
 ##
@@ -14,12 +15,12 @@ if __name__ == "__main__":
 	provider = RpcProvider.factory()
 
 	#Generate cli object
-	cli = CLIRoot(provider)
+	cli = Root(provider)
 
 	#Loop	
 	try:
 		cli.cmdloop()
-	except KeyboardInterrupt:
+	except Quit, KeyboardInterrupt:
 		cli.do_quit(None)
 
 

@@ -1,13 +1,15 @@
-from scopes import CLIScope
+from scopes import Scope
+import cmd
 
 #Prototype of an action
-class CLIRoot(CLIScope):
+class Root(Scope):
 	""" Main interactive CLI  """ 
 	#Name
-	def __init__ (self, rpcProvider):
+	def __init__(self, rpcProvider):
 		"""Constructor"""
-		CLIScope.__init__(self, "CLI root", appName=rpcProvider.getAppName())
 	
+		Scope.__init__(self,"root", rpcProvider, appName=rpcProvider.getAppName())
+		
 		#Setting a nice intro	
 		self.intro = rpcProvider.getAppInfo()
 	
@@ -16,20 +18,26 @@ class CLIRoot(CLIScope):
 		
 		#Actions
 		#FIXME
+		
+		#Delete unnecessary actions
+		#FIXME
 
 	#Config scope (edit mode)
 	def do_config(self, s):
 		"""Enters configuration mode"""
+
+		#FIXME: authentication
+
+		print "Entering configuration mode..."	
+		ret = self.launchSubScope("config")	
+		print "Leaving configuration mode"	
+	
 		#Must return the value!!!
-		return self.launchSubCLIScope("config")
+		return ret
 
 	def postloop(self):
-		print "Goodbye."
+		print "Goodbye!"
 		return True
 
 	def help_quit (self):
-		print "Quits the CLI..."
-
-	def __str__(self):
-		return "[%s,%s,%s]"%(name, str(_type), str(value))
-
+		print "Quits the ..."
