@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+<!-- Complex type definitions -->
+<xs:complexType name="lsi">
+	   <xs:sequence>
+		 <xs:element name="name" type="xs:string"></xs:element>
+		 <xs:element name="dpid" type="xs:double"></xs:element>
+		 <xs:element name="version" type="xs:double"></xs:element>
+		 <xs:element name="description" type="xs:string"></xs:element>
+		 <xs:element name="mode" type="xs:string"></xs:element>
+		 <xs:element name="master-controller-ip" type="xs:string"></xs:element>
+		 <xs:element name="master-controller-port" type="xs:int"></xs:element>
+		 <xs:element name="reconnect-time" type="xs:int"></xs:element>
+		 <xs:element name="num-of-tables" type="xs:int"></xs:element>
+		 <xs:element name="ports">
+		 <xs:complexType>
+			     <xs:sequence>
+				   <xs:element minOccurs="0" maxOccurs="unbounded" name="port" type="xs:string"/>
+			     </xs:sequence>
+		 </xs:complexType>
+		 </xs:element>
+	   </xs:sequence>
+</xs:complexType>
+
+<!-- Hierarchy -->
+<xs:element name="config">
+<xs:complexType>
+	     <xs:sequence>
+		   <xs:element name="openflow">
+		   <xs:complexType>
+			       <xs:sequence>
+				     <xs:element name="logical-switches">
+				     <xs:complexType>
+					<xs:sequence>
+						<xs:element minOccurs="1" maxOccurs="unbounded" name="logical-switch" type="lsi"/>
+					</xs:sequence>
+				     </xs:complexType>
+				     </xs:element>
+			       </xs:sequence>
+		   </xs:complexType>
+		   </xs:element>
+	     </xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:schema>

@@ -1,0 +1,23 @@
+<config>
+	<openflow>
+		<logical-switches>
+			<logical-switch>
+				<name>dp0</name>
+				<dpid>100</dpid>
+				<version>1.2</version>
+				<description>This is a switch</description>
+				<mode>active</mode>
+				<master-controller-ip>127.0.0.1</master-controller-ip>
+				<master-controller-port>6633</master-controller-port>
+				<reconnect-time>1</reconnect-time>
+				<num-of-tables>8</num-of-tables>
+				<ports>
+					<port>veth0</port>
+					<port>veth2</port>
+					<port>veth4</port>
+					<port>veth6</port>
+				</ports>
+			</logical-switch>
+		</logical-switches>
+	</openflow>
+</config>

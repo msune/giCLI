@@ -12,17 +12,17 @@ class LibconfigUtils(object):
 	@staticmethod
 	def parseSchemaScope(schema, config, prefix=""):
 		for schemaChild in schema.iterchildren():
-			if isinstance(schemaChild, str):
-				continue
 			#print prefix+str(schemaChild)
-			print "Name: %s type:%s\n" % (schemaChild.get("name"), schemaChild.get("type"))
+			if schemaChild.get("name"):
+				print "Name: %s type:%s tag:%s\n" % (schemaChild.get("name"), schemaChild.get("type"), schemaChild.tag)
 			LibconfigUtils.parseSchemaScope(schemaChild, config, prefix+"\t")
 
 	@staticmethod
 	def generateEmptyConfig(schema, parent, rpcProvider, appName):
 		#xmlschema = etree.XMLSchema(etree.XML(schema))
-		#xmlschema = etree.ElementTree(etree.XML(schema))
 		xmlschema = etree.fromstring(schema)
+		#xsd = etree.fromstring(schema)
+		#xmlschema = etree.XMLSchema(xsd)
 		config = NavigationalScope("config", rpcProvider, parentScope=parent, appName=appName, canNavigateUp=False) 
 
 		LibconfigUtils.parseSchemaScope(xmlschema, config)	
