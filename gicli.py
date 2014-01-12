@@ -8,7 +8,7 @@ from rpc.rpc_provider import RpcProvider
 ## Main routine
 ##
 if __name__ == "__main__":
-	print "Welcome to GCLI"
+	print "Welcome to giCLI"
 
 	#Instantiate provider
 	#FIXME 
